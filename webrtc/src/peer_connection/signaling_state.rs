@@ -121,6 +121,10 @@ pub(crate) fn check_next_signaling_state(
         return Err(Error::ErrSignalingStateCannotRollback);
     }
 
+    if sdp_type == RTCSdpType::Rollback {
+        return Ok(RTCSignalingState::Stable);
+    }
+
     // 4.3.1 valid state transitions
     match cur {
         RTCSignalingState::Stable => {
